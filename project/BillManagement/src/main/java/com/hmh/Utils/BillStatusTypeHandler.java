@@ -1,4 +1,4 @@
-package com.hmh;
+package com.hmh.Utils;
 
 import com.hmh.VO.BillStatus;
 import org.apache.ibatis.type.BaseTypeHandler;

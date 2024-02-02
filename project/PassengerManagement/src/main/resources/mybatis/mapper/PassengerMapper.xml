@@ -9,7 +9,7 @@
         insert into passenger_account
         values (#{id},#{password})
     </insert>
-    <insert id="newUserInfo" parameterType="com.hmh.VO.PassengerInfo" useGeneratedKeys="true" keyProperty="id">
+    <insert id="newPassengerInfo" parameterType="com.hmh.VO.PassengerInfo" useGeneratedKeys="true" keyProperty="id">
         insert into passenger_info (user_name)
         values (#{user_name})
     </insert>

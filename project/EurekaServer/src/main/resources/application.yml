@@ -9,6 +9,7 @@ spring:
 # Eureka配置
 eureka:
   instance:
+    instance-id: EUREKA-SERVER-7001
     hostname: localhost # Eureka服务端的名字
   client:
     register-with-eureka: true # 表示是否想Eureka中心注册自己

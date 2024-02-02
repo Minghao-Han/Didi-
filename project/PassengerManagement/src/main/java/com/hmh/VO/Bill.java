@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -13,8 +13,8 @@ public class Bill {
     private Long id;
     private Long passenger_id;
     private Long driver_id;
-    private Date start_time;
-    private Date arrive_time;
+    private LocalDateTime start_time;
+    private LocalDateTime arrive_time;
     private Double fare;
     private String from;
     private String to;

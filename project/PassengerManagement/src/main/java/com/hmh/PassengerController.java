@@ -28,23 +28,23 @@ public class PassengerController {
     @PostMapping("/register")
     public String register(@RequestBody Map<String,String> requestBody){
         String password = requestBody.get("password");
-        String user_name = requestBody.get("user_name");
-        passengerService.newUser(user_name,password);
+        String userName = requestBody.get("user_name");
+        passengerService.newUser(userName,password);
         return Response.success("successfully registered");
     }
 
     @GetMapping("/info")
-    public String checkPersonalInfo(@UserId Long passenger_id){
+    public String checkPersonalInfo(@UserId Long passengerId){
         System.out.println();
-        PassengerInfo passengerInfo = passengerService.getPassengerInfo(passenger_id);
+        PassengerInfo passengerInfo = passengerService.getPassengerInfo(passengerId);
         return Response.success("got personal info",passengerInfo);
     }
 
     @PostMapping("/login")
     public String login(@RequestBody Map<String,String> requestBody){
         String password = requestBody.get("password");
-        String user_name = requestBody.get("user_name");
-        Long id = passengerService.getPassengerInfo(user_name).getId();
+        String userName = requestBody.get("user_name");
+        Long id = passengerService.getPassengerInfo(userName).getId();
 
         if (passengerService.verifyPassword(id, password)){
             String jwt = JwtGenerator.generate(id);
@@ -59,20 +59,20 @@ public class PassengerController {
     }
 
     @PostMapping("/trip")
-    public String callTaxi(@RequestBody Map<String,String> requestBody,@UserId Long passenger_id){
+    public String callTaxi(@RequestBody Map<String,String> requestBody,@UserId Long passengerId){
         String from = requestBody.get("from");
         String to = requestBody.get("to");
         if (from==null||to==null) return Response.fail("missing destination and origin");
         Bill newBill = new Bill();
-        newBill.setPassenger_id(passenger_id);
+        newBill.setPassenger_id(passengerId);
         newBill.setTo(to);
         newBill.setFrom(from);
         newBill = billServiceFeign.callTaxi(newBill);
         return Response.success("called taxi, the bill id is",newBill.getId());
     }
     @GetMapping("/trip")
-    public String checkCurrentTrip(@UserId Long passenger_id){
-        Bill currentTrip = billServiceFeign.checkCurrentTrip(passenger_id);
+    public String checkCurrentTrip(@UserId Long passengerId){
+        Bill currentTrip = billServiceFeign.checkCurrentTrip(passengerId);
         if (currentTrip==null) return Response.success("no ongoing trip");
         DriverInfo driverInfo = null;
         if (currentTrip.getDriver_id()!=null)
@@ -80,8 +80,8 @@ public class PassengerController {
         return Response.success("got",new TripInfo(currentTrip,driverInfo));
     }
     @DeleteMapping("/trip/{bill_id}")
-    public String cancelWaitingTrip(@PathVariable("bill_id") Long bill_id){
-        if (billServiceFeign.cancelWaitingTrip(bill_id).equals(0))
+    public String cancelWaitingTrip(@PathVariable("bill_id") Long billId){
+        if (billServiceFeign.cancelWaitingTrip(billId).equals(0))
             return Response.fail("driver is on the way, you can't cancel it");
         return Response.success("canceled");
     }

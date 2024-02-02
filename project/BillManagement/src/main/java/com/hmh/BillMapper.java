@@ -14,6 +14,7 @@ public interface BillMapper {
     public Bill getBillWithStatus4Driver(Long driver_id, BillStatus status);
     public Bill getBillById(Long id);
     public void updateBillById(Bill bill);
-    public void insertBill(Bill newBill);
+    public Long insertBill(Bill newBill);
     public void deleteBillById(Long id);
+    public List<Bill> getBillByStatus(BillStatus status);
 }

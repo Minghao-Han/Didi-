@@ -10,8 +10,8 @@ public class PassengerService {
     @Autowired
     PassengerMapper passengerMapper;
 
-    public void newUser(String user_name,String password){
-        PassengerInfo passengerInfo = new PassengerInfo(null,user_name);
+    public void newUser(String userName,String password){
+        PassengerInfo passengerInfo = new PassengerInfo(null,userName);
         passengerMapper.newPassengerInfo(passengerInfo);
         passengerMapper.newAccount(password,passengerInfo.getId());
     }
@@ -23,7 +23,7 @@ public class PassengerService {
     public PassengerInfo getPassengerInfo(Long id){
         return passengerMapper.getPersonalInfoById(id);
     }
-    public PassengerInfo getPassengerInfo(String user_name){
-        return passengerMapper.getPersonalInfoByUsername(user_name);
+    public PassengerInfo getPassengerInfo(String userName){
+        return passengerMapper.getPersonalInfoByUsername(userName);
     }
 }

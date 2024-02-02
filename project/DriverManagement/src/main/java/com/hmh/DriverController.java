@@ -23,12 +23,12 @@ public class DriverController {
     @PostMapping("/register")
     public String register(@RequestBody Map<String,String> requestBody){
         String password = requestBody.get("password");
-        String driver_name = requestBody.get("driver_name");
-        String license_plate = requestBody.get("license_plate");
-        String vehicle_model = requestBody.get("vehicle_model");
-        if (password.isEmpty()||driver_name.isEmpty()||license_plate.isEmpty()||vehicle_model.isEmpty())
+        String driverName = requestBody.get("driver_name");
+        String licensePlate = requestBody.get("license_plate");
+        String vehicleModel = requestBody.get("vehicle_model");
+        if (password.isEmpty()||driverName.isEmpty()||licensePlate.isEmpty()||vehicleModel.isEmpty())
             return Response.fail("please supply enough information");
-        driverService.newUser(driver_name,license_plate,vehicle_model,password);
+        driverService.newUser(driverName,licensePlate,vehicleModel,password);
         return Response.success("successfully registered");
     }
 

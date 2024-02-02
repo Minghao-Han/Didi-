@@ -11,8 +11,8 @@ public class DriverService {
     @Autowired
     DriverMapper driverMapper;
 
-    public void newUser(String driver_name,String license_plate,String vehicle_model,String password){
-        DriverInfo driverInfo = new DriverInfo(null,driver_name,license_plate,vehicle_model, DriverStatus.OFFLINE);
+    public void newUser(String driverName,String licensePlate,String vehicleModel,String password){
+        DriverInfo driverInfo = new DriverInfo(null,driverName,licensePlate,vehicleModel, DriverStatus.OFFLINE);
         driverMapper.newDriverInfo(driverInfo);
         driverMapper.newAccount(password,driverInfo.getId());
     }

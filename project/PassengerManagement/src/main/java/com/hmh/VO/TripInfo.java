@@ -3,7 +3,7 @@ package com.hmh.VO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -13,8 +13,8 @@ public class TripInfo {
     private String driver_name;
     private String license_plate;
     private String vehicle_model;
-    private Date start_time;
-    private Date arrive_time;
+    private LocalDateTime start_time;
+    private LocalDateTime arrive_time;
     private Double fare;
     private String from;
     private String to;
@@ -23,6 +23,7 @@ public class TripInfo {
         this.id= bill.getId();
         this.passenger_id = bill.getPassenger_id();
         if (driverInfo!=null){
+            this.driver_name = driverInfo.getDriver_name();
             this.license_plate = driverInfo.getLicense_plate();
             this.vehicle_model = driverInfo.getVehicle_model();
         }

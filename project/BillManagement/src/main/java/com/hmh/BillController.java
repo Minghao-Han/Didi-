@@ -1,6 +1,5 @@
 package com.hmh;
 
-import com.hmh.Utils.Response;
 import com.hmh.VO.Bill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +11,8 @@ public class BillController {
     @Autowired
     BillService billService;
     @GetMapping("/bill/passenger/{passenger_id}")
-    public List<Bill> getPassengerBills(@PathVariable("passenger_id") Long passenger_id){
-        return billService.getHistoryBill4Passenger(passenger_id);
+    public List<Bill> getPassengerBills(@PathVariable("passenger_id") Long passengerId){
+        return billService.getHistoryBill4Passenger(passengerId);
     }
 
     @PostMapping("/trip/call")
@@ -24,10 +23,10 @@ public class BillController {
 
     @GetMapping("/trip/{passenger_id}")
     //If have a waiting trip, then return. Or return the ongoing bill.
-    public Bill checkCurrentTrip(@PathVariable("passenger_id") Long passenger_id){
-        Bill bill = billService.getWaitingOrder4Passenger(passenger_id);
+    public Bill checkCurrentTrip(@PathVariable("passenger_id") Long passengerId){
+        Bill bill = billService.getWaitingOrder4Passenger(passengerId);
         if (bill!=null) return bill;
-        return billService.getOngoingOrder4Passenger(passenger_id);
+        return billService.getOngoingOrder4Passenger(passengerId);
     }
     @DeleteMapping("/trip/{bill_id}")
     public Integer cancelWaitingTrip(@PathVariable("bill_id") Long bill_id){
@@ -36,6 +35,7 @@ public class BillController {
 
     @GetMapping("/bill/driver/{driverId}")
     public List<Bill> getMyBills(@PathVariable("driverId") Long driverId){
+        System.out.println(billService.getHistoryBill4Driver(driverId));
         return billService.getHistoryBill4Driver(driverId);
     }
 

@@ -9,9 +9,9 @@ import java.util.List;
 
 @Service
 //@FeignClient:微服务客户端注解,value:指定微服务的名字,这样就可以使Feign客户端直接找到对应的微服务
-@FeignClient(value = "BILL-SERVICE-PROVIDER")
+@FeignClient(value = "BILL-MANAGEMENT")
 public interface BillServiceFeign {
-    @GetMapping("/bill/{driverId}")
+    @GetMapping("/bill/driver/{driverId}")
     public List<Bill> getMyBills(@PathVariable("driverId") Long driverId);
 
     @GetMapping("/order/{driverId}")
