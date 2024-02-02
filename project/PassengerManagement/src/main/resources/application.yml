@@ -1,0 +1,26 @@
+server:
+  port: 8082
+
+# mybatis的配置
+mybatis:
+  type-aliases-package: nuc.ss.springcloud.pojo
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+# spring的配置
+spring:
+  application:
+    name: PASSENGER-MANAGEMENT
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/Didi
+    username: petclinic
+    password: petclinic
+
+# Eureka的配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/
+  instance:
+    instance-id: PASSENGER-MANAGEMENT-8082 #修改Eureka上的默认描述信息

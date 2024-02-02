@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hmh.PassengerMapper">
+
+    <insert id="newAccount" >
+        insert into passenger_account
+        values (#{id},#{password})
+    </insert>
+    <insert id="newUserInfo" parameterType="com.hmh.VO.PassengerInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into passenger_info (user_name)
+        values (#{user_name})
+    </insert>
+
+    <select id="getAccountById" resultType="com.hmh.VO.PassengerAccount">
+        select * from passenger_account where id = #{id}
+    </select>
+    
+    <select id="getPersonalInfoById" resultType="com.hmh.VO.PassengerInfo">
+        select * from passenger_info where id = #{id}
+    </select>
+    <select id="getPersonalInfoByUsername" resultType="com.hmh.VO.PassengerInfo">
+        select * from passenger_info where user_name = #{user_name}
+    </select>
+</mapper>

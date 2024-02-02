@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hmh.DriverMapper">
+
+    <select id="getAccountById" resultType="com.hmh.VO.DriverAccount">
+        select * from driver_account where id = #{id}
+    </select>
+
+    <select id="getDriverInfoById" resultType="com.hmh.VO.DriverInfo">
+        select * from driver_info where id = #{id}
+    </select>
+
+    <update id="updateDriverInfo" parameterType="com.hmh.VO.DriverInfo">
+        update driver_info
+        set driver_name = #{driver_name},
+        license_plate = #{license_plate},
+        vehicle_model = #{vehicle_model},
+        status = #{status}
+        where id = #{id};
+    </update>
+
+    <insert id="newAccount" >
+        insert into driver_account
+        values (#{id},#{password})
+    </insert>
+
+    <insert id="newDriverInfo" parameterType="com.hmh.VO.DriverInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into driver_account (driver_name,license_plate,vehicle_model,status)
+        values (#{driver_name},#{license_plate},#{vehicle_model},#{status})
+    </insert>
+
+</mapper>

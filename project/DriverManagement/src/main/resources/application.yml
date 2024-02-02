@@ -1,0 +1,27 @@
+server:
+  port: 8081
+
+# mybatis的配置
+mybatis:
+  type-aliases-package: com.hmh
+  type-handlers-package: com.hmh.Utils
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+# spring的配置
+spring:
+  application:
+    name: DRIVER-MANAGEMENT
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/Didi
+    username: petclinic
+    password: petclinic
+
+# Eureka的配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/
+  instance:
+    instance-id: DRIVER-MANAGEMENT-8081 #修改Eureka上的默认描述信息

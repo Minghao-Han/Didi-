@@ -1,0 +1,37 @@
+server:
+  port: 80
+
+
+# spring的配置
+spring:
+  application:
+    name: GATEWAY
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  cloud:
+    gateway:
+      routes:
+#         到乘客端
+        - id: toPassengerManagement
+          uri: lb://PASSENGER-MANAGEMENT
+          predicates:
+            - Path=/passenger/**
+          filters:
+            - StripPrefix=1
+            - name: PassengerAuthentication
+#         到司机端
+        - id: toDriverManagement
+          uri: lb://DRIVER-MANAGEMENT
+          predicates:
+            - Path=/driver/**
+          filters:
+            - StripPrefix=1
+            - name: DriverAuthentication
+
+# Eureka的配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/ #这里要改
+  instance:
+    instance-id: GATEWAY-80 #修改Eureka上的默认描述信息
