@@ -51,4 +51,9 @@ public class DriverService {
         }
         return false;
     }
+    public void finishOrder(Long driverId){
+        DriverInfo driverInfo = getDriverInfo(driverId);
+        driverInfo.setStatus(DriverStatus.WAITING);
+        driverMapper.updateDriverInfo(driverInfo);
+    }
 }

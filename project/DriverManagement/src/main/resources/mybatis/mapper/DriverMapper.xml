@@ -28,7 +28,7 @@
     </insert>
 
     <insert id="newDriverInfo" parameterType="com.hmh.VO.DriverInfo" useGeneratedKeys="true" keyProperty="id">
-        insert into driver_account (driver_name,license_plate,vehicle_model,status)
+        insert into driver_info (driver_name,license_plate,vehicle_model,status)
         values (#{driver_name},#{license_plate},#{vehicle_model},#{status})
     </insert>
 

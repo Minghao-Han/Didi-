@@ -86,5 +86,10 @@ public class BillService {
         return 1;//1代表已取消订单
     }
 
+    public void finishOrder4Driver(Long driverId){
+        Bill ongoingOrder = getOngoingOrder4Driver(driverId);
+        ongoingOrder.setStatus(BillStatus.FINISHED);
+        billMapper.updateBillById(ongoingOrder);
+    }
 
 }

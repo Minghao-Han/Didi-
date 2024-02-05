@@ -48,4 +48,9 @@ public class BillController {
     public Bill getOngoingOrder(@PathVariable("driverId") Long driverId){
         return billService.getOngoingOrder4Driver(driverId);
     }
+
+    @PutMapping("/order/finish")
+    public void driverFinishOrder(@RequestBody Long driverId){
+        billService.finishOrder4Driver(driverId);
+    }
 }

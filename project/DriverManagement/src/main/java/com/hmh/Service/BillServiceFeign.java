@@ -19,4 +19,6 @@ public interface BillServiceFeign {
 
     @GetMapping("/order/ongoing/{driverId}")
     public Bill getOngoingOrder(@PathVariable("driverId") Long driverId);
+    @PutMapping("/order/finish")
+    public void driverFinishOrder(@RequestBody Long driverId);
 }

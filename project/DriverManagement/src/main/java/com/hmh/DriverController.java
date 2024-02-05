@@ -6,7 +6,9 @@ import com.hmh.Utils.JwtGenerator;
 import com.hmh.Utils.Response;
 import com.hmh.Utils.UserId;
 import com.hmh.VO.Bill;
+import com.hmh.VO.BillStatus;
 import com.hmh.VO.DriverInfo;
+import com.hmh.VO.DriverStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -78,6 +80,8 @@ public class DriverController {
 
     @GetMapping("/order")
     public String  receiveOrder(@UserId Long driverId){
+        DriverStatus status = driverService.getDriverInfo(driverId).getStatus();
+        if (status.equals(DriverStatus.OFFLINE)) return Response.fail("you are offline now, can't receive order");
         Bill bill = billServiceFeign.receiveOrder(driverId);
         if (bill == null) return Response.fail("no passengers");
         return Response.success("received an order",bill);
@@ -88,5 +92,11 @@ public class DriverController {
         Bill bill = billServiceFeign.getOngoingOrder(driverId);
         if (bill == null) return Response.fail("no ongoing order");
         return Response.success("got",bill);
+    }
+    @PutMapping("/order")
+    public String finishOrder(@UserId Long driverId){
+        billServiceFeign.driverFinishOrder(driverId);
+        finishOrder(driverId);
+        return Response.success("finished order");
     }
 }
