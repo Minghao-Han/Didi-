@@ -45,12 +45,12 @@ Nearly all operations, except login and register, require the user's ID. For sec
 
 ### 1. High Memory Usage in Order Handling
 
-**Problem**: Storing orders in memory enhances response speed compared to database retrieval but leads to high memory use or overflow.
+**Problem**: Storing orders in memory enhances response speed compared to database retrieval but leads to high memory use or overflow.  
 **Solution**: Implement an ArrayBlockingQueue for orders named `waitingBills` with a set limit. The BILL-MANAGEMENT service first saves new orders with a WAITING status in the database and then queues them in a new thread, allowing for quick responses and enabling passengers to check their orders even if they haven't been added to the `waitingBills` queue.
 
 ### 2. Lack of Map System Integration
 
-**Problem**: The system does not integrate with any map service, leading to drivers receiving orders without consideration of location or distance, and inaccurate fare calculations.
+**Problem**: The system does not integrate with any map service, leading to drivers receiving orders without consideration of location or distance, and inaccurate fare calculations.  
 **Solution**: Integrate with a map service, such as Baidu Maps, using its API to address location and distance considerations in order dispatch and fare calculation.
 
 ### 3. Absence of a Payment System
